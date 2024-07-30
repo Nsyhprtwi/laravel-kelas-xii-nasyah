@@ -4,7 +4,7 @@
       <a href="{{ route('home') }}"><h1>One<span>Movies</span></h1></a>
     </div>
     <div class="w3_search">
-      <form action="#" method="post">
+        <form action="{{ route('search') }}" method="get">
         <input type="text" name="Search" placeholder="Search" required="">
         <input type="submit" value="Go">
       </form>
