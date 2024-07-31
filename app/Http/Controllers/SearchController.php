@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Film;
+use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
     public function search(Request $request)
     {
-        $query = $request->input('query');
-        $results = Film::where('title', 'LIKE', "%{$query}%")->get(); // Sesuaikan logika pencarian dengan kebutuhan Anda
+        $keyword = $request->input('search');
+        $film = Film::where('title', 'like', "%".$keyword."%")
+        ->orwhere('sinopsis', 'like', "%".$keyword."%")
+        ->orWhere('year', 'like', "%".$keyword."%")
+        ->first();
 
-        return view('search_results', compact('results'));
+        return view('components.searchresults', compact('film'));
     }
 }
